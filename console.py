@@ -7,7 +7,7 @@ import cmd
 class HBNBCommand(cmd.Cmd):
     prompt = '(hbnb) '
 
-    if input == "":
+    def emptyline(self):
         pass
 
     def do_EOF(self, line):
