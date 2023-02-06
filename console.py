@@ -22,5 +22,6 @@ class HBNBCommand(cmd.Cmd):
         but should be kept updated and documented
         as we work through tasks"""
 
+
 if __name__ == '__main__':
     HBNBCommand().cmdloop()
