@@ -3,18 +3,23 @@
 deserializes JSON for to instances"""
 import json
 import models
-from models.base_model import User
-from models.base_model import Place
-from models.base_model import State
-from models.base_model import City
-from models.base_model import Amenity
-from models.base_model import Review
+from models.base_model import BaseModel
+from models.user import User
+from models.city import City
+from models.place import Place
+from models.review import Review
+from models.state import State
+from models.amenity import Amenity
 
 
 class FileStorage:
     """initalizes FileStorage"""
     __file__path = "file.json"
     __objects = {}
+
+    def __init__(self):
+        """gettin' init, if you will"""
+        pass
 
     @classmethod
     def all(self):
