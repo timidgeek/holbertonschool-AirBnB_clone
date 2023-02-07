@@ -1,0 +1,37 @@
+Test for the for the if loop adding extra space
+(hbnb) help
+
+Documented commands (type help <topic>):
+========================================
+EOF  help  quit
+
+(hbnb) 
+
+Documented commands (type help <topic>):
+========================================
+EOF  help  quit
+
+(hbnb) 
+
+Documented commands (type help <topic>):
+========================================
+EOF  help  quit
+
+(hbnb) 
+
+Documented commands (type help <topic>):
+========================================
+EOF  help  quit
+
+(hbnb) 
+
+Documented commands (type help <topic>):
+========================================
+EOF  help  quit
+
+(hbnb) Traceback (most recent call last):
+  File "console.py", line 27, in <module>
+    HBNBCommand().cmdloop()
+  File "/usr/lib/python3.8/cmd.py", line 126, in cmdloop
+    line = input(self.prompt)
+KeyboardInterrupt
