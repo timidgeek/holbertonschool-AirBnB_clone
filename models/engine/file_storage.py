@@ -3,6 +3,8 @@
 deserializes JSON for to instances"""
 import json
 import models
+from models.base_model import User
+
 
 
 class FileStorage:
