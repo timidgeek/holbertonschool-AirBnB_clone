@@ -4,7 +4,11 @@ deserializes JSON for to instances"""
 import json
 import models
 from models.base_model import User
-
+from models.base_model import Place
+from models.base_model import State
+from models.base_model import City
+from models.base_model import Amenity
+from models.base_model import Review
 
 
 class FileStorage:
@@ -18,7 +22,7 @@ class FileStorage:
         return self.__objects
 
     def new(self, obj):
-        """sets in __objexts the obk with key <obj class name>.id"""
+        """sets in __objects the obj with key <obj class name>.id"""
         self.__objects[f"{obj.__class__.__name__}{obj.id}"] = obj
 
     def save(self):
