@@ -41,7 +41,10 @@ class HBNBCommand(cmd.Cmd):
         raise SystemExit
 
     def do_create(self, args):
-        "Creates new instance of BaseModel"
+        """Creates new instance of BaseModel,
+        as long as the given argument is one of the keys,
+        and saves new instance in JSON file"""
+
         if len(args) < 1:
             print("** class name missing **")
         elif args in ciara.keys():
@@ -52,7 +55,20 @@ class HBNBCommand(cmd.Cmd):
             print("** class doesn't exist **")
 
     def do_show(self, args):
-        "Prints the string representation of an instance"
+        """do_show prints the string representation
+            of an instance
+        
+            first it splits args, then checks if
+            the input is valid and meets certain
+            conditions
+
+            if the input is valid, it searches
+            for an instance with the specified class name
+            and ID, and prints the content
+
+            if the input is invalid or the instance is not
+            found, it prints error messages"""
+
         split_arg = args.split(" ")
         if len(args) == 0:
             print("** class name missing **")
@@ -70,9 +86,20 @@ class HBNBCommand(cmd.Cmd):
             print("** class doesn't exist **")
 
     def do_destroy(self, args):
-        """Deletes an instance based on the
-            class name and id, and saves the
-            change into the JSON file"""
+        """do_destroy nukes an instance
+        
+            first it splits args, then checks if
+            the input is valid and meets certain
+            conditions
+
+            if the input is valid, it searches
+            for an instance with the specified class name
+            and ID, and deletes it
+
+            if the input is invalid or the instance is not
+            found, it prints error messages
+
+            saves change into the JSON file"""
 
         split_arg = args.split(" ")
         if len(args) == 0:
@@ -92,22 +119,49 @@ class HBNBCommand(cmd.Cmd):
             print("** class doesn't exist **")
 
     def do_all(self, args):
-        "Prints all string representation of all instances"
+        """do_all prints all string representation of
+            all instances
+            
+            first it splits args, then checks if
+            the input is valid and meets certain
+            conditions
+
+            if the input is valid, it searches
+            for an instance with the specified class name
+            and ID, and deletes it
+
+            if the input is invalid or the instance is not
+            found, it prints error messages
+
+            saves change into the JSON file"""
+
         split_arg = args.split(" ")
         if len(args) == 0:
-            for k in storage.all():
-                print([str(storage.all()[k])])
+            for key in storage.all():
+                print([str(storage.all()[key])])
         elif args not in ciara.keys():
             print("** class doesn't exist **")
         else:
-            for k, v in storage.all().items():
-                if args == v.__class__.__name__:
-                    print([str(storage.all()[k])])
+            for key, value in storage.all().items():
+                if args == value.__class__.__name__:
+                    print([str(storage.all()[key])])
 
     def do_update(self, args):
-        "Updates attributes of an instance"
-        if len(args) == 0:
-            print("** class name missing **")
+        """do_update updates attributes of an instance
+        
+            first it splits args, then checks if
+            the input is valid and meets certain
+            conditions
+
+            if the input is valid, it searches
+            for an instance with the specified class name
+            and ID, and updates the specified attribute of the instance
+            with the given value
+
+            if the input is invalid or the instance is not
+            found, it prints error messages
+
+            updated instance is saved in JSON file"""
 
         split_arg = args.split(" ")
         if len(split_arg) == 0:
@@ -123,11 +177,10 @@ class HBNBCommand(cmd.Cmd):
         else:
             search = split_arg[0] + "." + split_arg[1]
             all = storage.all()
-            for search in all:
-                if search in all:
-                    setattr(storage.all[search],
-                            split_arg[2], split_arg[3])
-                    storage.save()
+            if search in all:
+                setattr(storage.all[search],
+                        split_arg[2], split_arg[3])
+                storage.save()
             else:
                 print("** no instance found **")
 
