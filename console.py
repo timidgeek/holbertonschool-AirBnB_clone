@@ -57,7 +57,7 @@ class HBNBCommand(cmd.Cmd):
     def do_show(self, args):
         """do_show prints the string representation
             of an instance
-        
+
             first it splits args, then checks if
             the input is valid and meets certain
             conditions
@@ -87,7 +87,7 @@ class HBNBCommand(cmd.Cmd):
 
     def do_destroy(self, args):
         """do_destroy nukes an instance
-        
+
             first it splits args, then checks if
             the input is valid and meets certain
             conditions
@@ -121,7 +121,7 @@ class HBNBCommand(cmd.Cmd):
     def do_all(self, args):
         """do_all prints all string representation of
             all instances
-            
+
             first it splits args, then checks if
             the input is valid and meets certain
             conditions
@@ -148,7 +148,7 @@ class HBNBCommand(cmd.Cmd):
 
     def do_update(self, args):
         """do_update updates attributes of an instance
-        
+
             first it splits args, then checks if
             the input is valid and meets certain
             conditions
@@ -176,10 +176,10 @@ class HBNBCommand(cmd.Cmd):
             print("** class doesn't exist **")
         else:
             search = split_arg[0] + "." + split_arg[1]
-            all = storage.all()
-            if search in all:
-                setattr(storage.all[search],
-                        split_arg[2], split_arg[3])
+            every = storage.all()
+            if search in every:
+                setattr(storage.all()[search],
+                        split_arg[2], split_arg[3].strip('\'"'))
                 storage.save()
             else:
                 print("** no instance found **")
