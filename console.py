@@ -15,7 +15,8 @@ import json
 
 
 ciara = {"BaseModel": BaseModel, "User": User, "City": City,
-             "Place": Place, "Review": Review, "State": State, "Amenity": Amenity}
+         "Place": Place, "Review": Review, "State": State,
+         "Amenity": Amenity}
 
 
 class HBNBCommand(cmd.Cmd):
@@ -46,16 +47,15 @@ class HBNBCommand(cmd.Cmd):
         else:
             print("** class doesn't exist **")
 
-    """def do_show(self, args):
+    def do_show(self, args):
         "Prints the string representation of an instance"
         splitty = args.split(" ")
         if len(args) == 0:
             print("** class name missing **")
         elif splitty[0] not in ciara:
             print("** class doesn't exist **")
-        elif len(splitty) >= 1:
-            try:
-                
+        """elif len(splitty) >= 1:
+            try:"""
 
     def do_destroy(self, args):
         "Deletes an instance"
@@ -70,8 +70,7 @@ class HBNBCommand(cmd.Cmd):
     def do_update(self, args):
         "Updates attributes of an instance"
         if len(args) == 0:
-            print("** class name missing **")"""
-
+            print("** class name missing **")
 
     """help action is provided by default,
         but should be kept updated and documented
