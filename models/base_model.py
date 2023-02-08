@@ -6,10 +6,7 @@ import models
 
 
 class BaseModel:
-
-
     """This is the base class for all the other classes"""
-
 
     def __init__(self, *args, **kwargs):
         """this initalizes the class ~(^-^)~"""

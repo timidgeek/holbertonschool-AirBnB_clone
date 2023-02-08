@@ -1,4 +1,6 @@
-# 0x00. AirBnB clone - The console :sparkles:
+![This is a alt text.](https://user-images.githubusercontent.com/107968573/216862342-3bd995bb-a40c-4fcd-a66b-d0473af89352.png "hehe")
+
+# :sparkles: 0x00. AirBnB clone - The console :sparkles:
 
 ## :bulb: Purpose (description of project)
 
