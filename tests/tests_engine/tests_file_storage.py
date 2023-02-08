@@ -30,24 +30,25 @@ class TestFileStorage(unittest.TestCase):
         obj = BaseModel()
         self.file_storage.new(obj)
         self.file_storage.save()
-        with open (self.file_path, "r") as fool:
-             file_content = json.load(file)
+        with open(self.file_path, "r") as file:
+            file_content = json.load(file)
         self.assertEqual(obj.to_dict(),
                          file_content["BaseModel.{}".format(obj.id)])
 
     def test_reload(self):
-      obj = BaseModel()
+        obj = BaseModel()
         self.file_storage.new(obj)
         self.file_storage.save()
         self.file_storage.__objects = {}
         self.file_storage.reload()
         objects = self.file_storage.all()
         self.assertEqual(obj.to_dict(),
-                         objects["BaseModel.{}".format(obj.id)])
+                         objects["BaseModel.{}".format(obj.id)].to_dict())
 
     def tearDown(self):
-      if os.path.exists(self.file_path):
-         os.remove(self.file_path)
+        if os.path.exists(self.file_path):
+            os.remove(self.file_path)
+
 
 if __name__ == "__main__":
-  unittest.main()
+    unittest.main()

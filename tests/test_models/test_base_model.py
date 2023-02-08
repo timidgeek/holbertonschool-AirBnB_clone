@@ -1,5 +1,5 @@
-import unittest
 import uuid
+import unittest
 from datetime import datetime
 from models.base_model import BaseModel
 
