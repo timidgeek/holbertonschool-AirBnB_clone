@@ -22,18 +22,15 @@ class BaseModel:
             self.id = str(uuid.uuid4())
             models.storage.new(self)
 
-
     def __str__(self):
         """returns a string"""
         return ("[{}] ({}) {}".format(self.__class__.__name__, self.id,
                 self.__dict__))
 
-
     def save(self):
         """updates the public instance attribute with current datetime"""
         self.updated_at = datetime.now
         models.storage.save()
-
 
     def to_dict(self):
         """returns a dict containing all keys/values of __dict__"""

@@ -2,7 +2,7 @@
 """console.py program, contains the entry point
     of the command interpreter"""
 import cmd
-import shlex # for splitting lines
+import shlex  # for splitting lines
 from models.engine.file_storage import FileStorage
 from models.base_model import BaseModel
 from models.user import User
@@ -14,8 +14,12 @@ from models.amenity import Amenity
 import json
 
 
-ciara = {"BaseModel": BaseModel, "User": User, "City": City,
-         "Place": Place, "Review": Review, "State": State,
+ciara = {"BaseModel": BaseModel,
+         "User": User,
+         "City": City,
+         "Place": Place,
+         "Review": Review,
+         "State": State,
          "Amenity": Amenity}
 
 
@@ -65,7 +69,7 @@ class HBNBCommand(cmd.Cmd):
 
     def do_destroy(self, args):
         """Deletes an instance based on the
-            class name and id, and saves the 
+            class name and id, and saves the
             change into the JSON file"""
 
         split_arg = args.split(" ")
@@ -73,7 +77,7 @@ class HBNBCommand(cmd.Cmd):
             print("** class name missing **")
         elif split_arg[0] in ciara:
             if len(split_arg) < 2:
-               print("** instance id missing **")
+                print("** instance id missing **")
         else:
             print("** class doesn't exist **")
 
@@ -94,31 +98,28 @@ class HBNBCommand(cmd.Cmd):
         "Updates attributes of an instance"
         if len(args) == 0:
             print("** class name missing **")
-            
+
         split_arg = shlex.split(args)
         if len(split_arg) == 0:
             print("** class name missing **")
-        elif len(split_arg) == 1:
+        elif len(split_arg) < 2:
             print("** instance id missing **")
-        elif len(split_arg) == 2:
+        elif len(split_arg) < 3:
             print("** attribute name missing **")
-        elif len(split_arg) == 3:
+        elif len(split_arg) < 4:
             print("** value missing **")
         elif split_arg[0] not in ciara:
             print("** class doesn't exist **")
         else:
-            objects = FileStorage.all(self)
-            k2 = split_arg[0] + "." + split_arg[1]
-            flag = 0
-            for k, v in objects.items():
-                if k == k2:
-                    flag = 1
-                    v2 = objects.get(k)
-                    setattr(v, split_arg[2], split_arg[3])
-                    v.save()
-            if flag == 0:
+            search = split_arg[0] + "." + split_arg[1]
+            all = FileStorage().all()
+            for search in all:
+                if search in all:
+                    setattr(FileStorage().all[search],
+                            split_arg[2], split_arg[3])
+                    FileStorage().save()
+            else:
                 print("** no instance found **")
-
 
     """help action is provided by default,
         but should be kept updated and documented
