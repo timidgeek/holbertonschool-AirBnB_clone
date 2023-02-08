@@ -2,7 +2,7 @@
 """console.py program, contains the entry point
     of the command interpreter"""
 import cmd
-import shlex
+import shlex # for splitting lines
 from models.engine.file_storage import FileStorage
 from models.base_model import BaseModel
 from models.user import User
@@ -36,41 +36,89 @@ class HBNBCommand(cmd.Cmd):
 
     def do_create(self, args):
         "Creates new instance of BaseModel"
-        if len(args) == 0:
+        if len(args) < 1:
             print("** class name missing **")
-        elif args in ciara:
-            for k, value in ciara.items():
-                if k == args:
-                    new_instance = ciara[k]()
-                storage.save()
-                print(new_instance.id)
+        elif args in ciara.keys():
+            new = ciara[args]()
+            new.save
+            print(new.id)
         else:
             print("** class doesn't exist **")
 
     def do_show(self, args):
         "Prints the string representation of an instance"
-        splitty = args.split(" ")
+        split_arg = args.split(" ")
         if len(args) == 0:
             print("** class name missing **")
-        elif splitty[0] not in ciara:
+        elif split_arg[0] in ciara.keys():
+            if len(split_arg) < 2:
+                print("** instance id missing **")
+            else:
+                search = split_arg[0] + "." + split_arg[1]
+                all = FileStorage().all()
+                if search in all:
+                    print(all[search])
+                else:
+                    print("** no instance found **")
+        else:
             print("** class doesn't exist **")
-        """elif len(splitty) >= 1:
-            try:"""
 
     def do_destroy(self, args):
-        "Deletes an instance"
+        """Deletes an instance based on the
+            class name and id, and saves the 
+            change into the JSON file"""
+
+        split_arg = args.split(" ")
         if len(args) == 0:
             print("** class name missing **")
+        elif split_arg[0] in ciara:
+            if len(split_arg) < 2:
+               print("** instance id missing **")
+        else:
+            print("** class doesn't exist **")
 
     def do_all(self, args):
         "Prints all string representation of all instances"
+        split_arg = args.split(" ")
         if len(args) == 0:
-            print("** class name missing **")
+            for k in FileStorage().all():
+                print([str(FileStorage().all()[k])])
+        elif args not in ciara.keys():
+            print("** class doesn't exist **")
+        else:
+            for k, v in FileStorage().all().items():
+                if args == v.__class__.__name__:
+                    print([str(FileStorage().all()[k])])
 
     def do_update(self, args):
         "Updates attributes of an instance"
         if len(args) == 0:
             print("** class name missing **")
+            
+        split_arg = shlex.split(args)
+        if len(split_arg) == 0:
+            print("** class name missing **")
+        elif len(split_arg) == 1:
+            print("** instance id missing **")
+        elif len(split_arg) == 2:
+            print("** attribute name missing **")
+        elif len(split_arg) == 3:
+            print("** value missing **")
+        elif split_arg[0] not in ciara:
+            print("** class doesn't exist **")
+        else:
+            objects = FileStorage.all(self)
+            k2 = split_arg[0] + "." + split_arg[1]
+            flag = 0
+            for k, v in objects.items():
+                if k == k2:
+                    flag = 1
+                    v2 = objects.get(k)
+                    setattr(v, split_arg[2], split_arg[3])
+                    v.save()
+            if flag == 0:
+                print("** no instance found **")
+
 
     """help action is provided by default,
         but should be kept updated and documented
