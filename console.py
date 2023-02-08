@@ -40,11 +40,11 @@ class HBNBCommand(cmd.Cmd):
 
     def do_create(self, args):
         "Creates new instance of BaseModel"
-        if len(args) < 1:
+        if len(args) == 0:
             print("** class name missing **")
         elif args in ciara.keys():
             new = ciara[args]()
-            new.save
+            new.save()
             print(new.id)
         else:
             print("** class doesn't exist **")
