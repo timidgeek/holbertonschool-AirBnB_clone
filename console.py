@@ -176,10 +176,10 @@ class HBNBCommand(cmd.Cmd):
             print("** class doesn't exist **")
         else:
             search = split_arg[0] + "." + split_arg[1]
-            all = storage.all()
-            if search in all:
-                setattr(storage.all[search],
-                        split_arg[2], split_arg[3])
+            every = storage.all()
+            if search in every:
+                setattr(storage.all()[search],
+                        split_arg[2], split_arg[3].strip('\'"'))
                 storage.save()
             else:
                 print("** no instance found **")
