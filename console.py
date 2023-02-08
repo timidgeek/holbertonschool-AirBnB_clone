@@ -178,7 +178,7 @@ class HBNBCommand(cmd.Cmd):
             search = split_arg[0] + "." + split_arg[1]
             all = storage.all()
             if search in all:
-                setattr(storage.all[search],
+                setattr(storage.all()[search],
                         split_arg[2], split_arg[3].strip('\'"'))
                 storage.save()
             else:
