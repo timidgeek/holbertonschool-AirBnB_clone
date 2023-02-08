@@ -4,6 +4,7 @@
 import cmd
 import shlex  # for splitting lines
 from models.engine.file_storage import FileStorage
+from models import storage
 from models.base_model import BaseModel
 from models.user import User
 from models.city import City
@@ -40,7 +41,7 @@ class HBNBCommand(cmd.Cmd):
 
     def do_create(self, args):
         "Creates new instance of BaseModel"
-        if len(args) == 0:
+        if len(args) < 1:
             print("** class name missing **")
         elif args in ciara.keys():
             new = ciara[args]()
@@ -59,7 +60,7 @@ class HBNBCommand(cmd.Cmd):
                 print("** instance id missing **")
             else:
                 search = split_arg[0] + "." + split_arg[1]
-                all = FileStorage().all()
+                all = storage.all()
                 if search in all:
                     print(all[search])
                 else:
@@ -85,14 +86,14 @@ class HBNBCommand(cmd.Cmd):
         "Prints all string representation of all instances"
         split_arg = args.split(" ")
         if len(args) == 0:
-            for k in FileStorage().all():
-                print([str(FileStorage().all()[k])])
+            for k in storage.all():
+                print([str(storage.all()[k])])
         elif args not in ciara.keys():
             print("** class doesn't exist **")
         else:
-            for k, v in FileStorage().all().items():
+            for k, v in storage.all().items():
                 if args == v.__class__.__name__:
-                    print([str(FileStorage().all()[k])])
+                    print([str(storage.all()[k])])
 
     def do_update(self, args):
         "Updates attributes of an instance"
@@ -112,12 +113,12 @@ class HBNBCommand(cmd.Cmd):
             print("** class doesn't exist **")
         else:
             search = split_arg[0] + "." + split_arg[1]
-            all = FileStorage().all()
+            all = storage.all()
             for search in all:
                 if search in all:
-                    setattr(FileStorage().all[search],
+                    setattr(storage.all[search],
                             split_arg[2], split_arg[3])
-                    FileStorage().save()
+                    storage.save()
             else:
                 print("** no instance found **")
 

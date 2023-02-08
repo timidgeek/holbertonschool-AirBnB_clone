@@ -44,8 +44,7 @@ class FileStorage:
         try:
             with open(self.__file_path, 'r') as fool:
                 jenna = json.load(fool)
-                for k in jenna:
-                    self.__file__path[k] = getattr(models, jenna[k]
-                                                   ['__class__'])(**jenna[k])
+                for key, value in jenna.items():
+                    self.__objects[key] = eval(value["__class__"])(**value)
         except FileNotFoundError:
             pass
