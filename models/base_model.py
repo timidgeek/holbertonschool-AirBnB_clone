@@ -20,7 +20,7 @@ class BaseModel:
             self.created_at = datetime.now()
             self.updated_at = datetime.now()
             self.id = str(uuid.uuid4())
-            models.storage.new(self)
+            models.FileStorage().new(self)
 
     def __str__(self):
         """returns a string"""
