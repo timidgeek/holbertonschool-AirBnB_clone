@@ -35,16 +35,16 @@ class FileStorage:
         jsonobj = {}
         for k, v in self.__objects.items():
             jsonobj[k] = v.to_dict()
-        with open(self.__file_path, "w") as fool:
-            json.dump(jsonobj, fool)
+        with open(self.__file_path, "w", encoding="utf-8") as fool:
+            fool.write(json.dumps(jsonobj))
 
     def reload(self):
         """deserializes the JSON file to __objexts only if the JSON file
         (__file__path) exists, otherwise do nothing"""
         try:
-            with open(self.__file_path, 'r') as fool:
-                jenna = json.load(fool)
-                for key, value in jenna.items():
-                    self.__objects[key] = eval(value["__class__"])(**value)
+            with open(self.__file_path, "r", encoding="utf-8") as fool:
+                jenna = json.loads(fool.read())
+            for key, value in jenna.items():
+                self.__objects[key] = eval(value["__class__"])(**value)
         except FileNotFoundError:
             pass
