@@ -57,7 +57,7 @@ class HBNBCommand(cmd.Cmd):
     def do_show(self, args):
         """do_show prints the string representation
             of an instance
-
+        
             first it splits args, then checks if
             the input is valid and meets certain
             conditions
@@ -121,7 +121,7 @@ class HBNBCommand(cmd.Cmd):
     def do_all(self, args):
         """do_all prints all string representation of
             all instances
-
+            
             first it splits args, then checks if
             the input is valid and meets certain
             conditions
@@ -148,7 +148,7 @@ class HBNBCommand(cmd.Cmd):
 
     def do_update(self, args):
         """do_update updates attributes of an instance
-
+        
             first it splits args, then checks if
             the input is valid and meets certain
             conditions
@@ -166,23 +166,25 @@ class HBNBCommand(cmd.Cmd):
         split_arg = args.split(" ")
         if len(split_arg) == 0:
             print("** class name missing **")
-        elif len(split_arg) < 2:
-            print("** instance id missing **")
+        if (split_arg[0] in ciara.keys()) is True:
+            if len(split_arg) < 2:
+                print("** instance id missing **")
+        else:
+            print("** class doesn't exist **")
+        # stores strings from split to key
+        key = str(split_arg[0]) + '.' + str(split_arg[1])
+        every = storage.all()
+
+        if (key in every) is False:
+            # if value stored in key is within dictonary
+            print("** no instance found **")
         elif len(split_arg) < 3:
             print("** attribute name missing **")
         elif len(split_arg) < 4:
             print("** value missing **")
-        elif split_arg[0] not in ciara.keys():
-            print("** class doesn't exist **")
-        else:
-            search = split_arg[0] + "." + split_arg[1]
-            every = storage.all()
-            if search in every:
-                setattr(storage.all()[search],
-                        split_arg[2], split_arg[3].strip('\'"'))
-                storage.save()
-            else:
-                print("** no instance found **")
+            return
+        # using eval, we cast to correct attribute type
+        every[key].__dict__[split_arg[2]] = eval(split_arg[3])
 
     """help action is provided by default,
         but should be kept updated and documented
