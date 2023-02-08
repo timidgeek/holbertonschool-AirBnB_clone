@@ -172,7 +172,7 @@ class HBNBCommand(cmd.Cmd):
             print("** attribute name missing **")
         elif len(split_arg) < 4:
             print("** value missing **")
-        elif split_arg[0] not in ciara:
+        elif split_arg[0] not in ciara.keys():
             print("** class doesn't exist **")
         else:
             search = split_arg[0] + "." + split_arg[1]
