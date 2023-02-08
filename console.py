@@ -77,9 +77,17 @@ class HBNBCommand(cmd.Cmd):
         split_arg = args.split(" ")
         if len(args) == 0:
             print("** class name missing **")
-        elif split_arg[0] in ciara:
+        elif split_arg[0] in ciara.keys():
             if len(split_arg) < 2:
                 print("** instance id missing **")
+            else:
+                search = split_arg[0] + "." + split_arg[1]
+                all = storage.all()
+                if search in all:
+                    del all[search]
+                    storage.save()
+                else:
+                    print("** no instance found **")
         else:
             print("** class doesn't exist **")
 
@@ -101,7 +109,7 @@ class HBNBCommand(cmd.Cmd):
         if len(args) == 0:
             print("** class name missing **")
 
-        split_arg = shlex.split(args)
+        split_arg = args.split(" ")
         if len(split_arg) == 0:
             print("** class name missing **")
         elif len(split_arg) < 2:
