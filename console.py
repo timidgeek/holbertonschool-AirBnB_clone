@@ -2,10 +2,7 @@
 """console.py program, contains the entry point
     of the command interpreter"""
 import cmd
-import json
 import shlex
-from datetime import datetime
-from models import storage
 from models.engine.file_storage import FileStorage
 from models.base_model import BaseModel
 from models.user import User
@@ -14,11 +11,10 @@ from models.place import Place
 from models.review import Review
 from models.state import State
 from models.amenity import Amenity
+import json
 
 
-
-
-our_class = {"BaseModel": BaseModel, "User": User, "City": City,
+ciara = {"BaseModel": BaseModel, "User": User, "City": City,
              "Place": Place, "Review": Review, "State": State, "Amenity": Amenity}
 
 
@@ -29,11 +25,11 @@ class HBNBCommand(cmd.Cmd):
     def emptyline(self):
         pass
 
-    def do_EOF(self, line):
+    def do_EOF(self, args):
         "Exit"
         return True
 
-    def do_quit(self, line):
+    def do_quit(self, args):
         "Quit command to exit the program\n"
         raise SystemExit
 
@@ -41,10 +37,10 @@ class HBNBCommand(cmd.Cmd):
         "Creates new instance of BaseModel"
         if len(args) == 0:
             print("** class name missing **")
-        elif args in our_class:
-            for k, value in our_class.items():
+        elif args in ciara:
+            for k, value in ciara.items():
                 if k == args:
-                    new_instance = our_class[k]()
+                    new_instance = ciara[k]()
                 storage.save()
                 print(new_instance.id)
         else:
@@ -52,8 +48,14 @@ class HBNBCommand(cmd.Cmd):
 
     """def do_show(self, args):
         "Prints the string representation of an instance"
+        splitty = args.split(" ")
         if len(args) == 0:
             print("** class name missing **")
+        elif splitty[0] not in ciara:
+            print("** class doesn't exist **")
+        elif len(splitty) >= 1:
+            try:
+                
 
     def do_destroy(self, args):
         "Deletes an instance"
