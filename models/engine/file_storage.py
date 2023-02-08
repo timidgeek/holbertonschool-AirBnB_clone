@@ -20,7 +20,7 @@ class FileStorage:
     def __init__(self):
         """gettin' init, if you will"""
         pass
-    
+
     @classmethod
     def all(self):
         """returns dictionary"""
