@@ -1,23 +1,35 @@
 #!/usr/bin/python3
 """AMENITY MODULE TESTS"""
-import unittest
-import models
-import os
-from datetime import datetime
 from models.amenity import Amenity
+import pep8
+import unittest
 
+class TestAmenity(unittest.TestCase):
+    """Test cases for Amenity"""
 
-class TestAmenityModel(unittest.TestCase):
-    """TASK 10 UNIT TESTS"""
-    def test_init(self):
-        self.assertEqual(Amenity, type(Amenity()))
+    def setUp(self):
+        """Sets up objects for testing"""
+        self.amenityOne = Amenity()
+        self.amenityTwo = Amenity()
 
-    def test_name_pub(self):
-        pool = Amenity()
-        self.assertEqual(str, type(Amenity.name))
-        self.assertIn("name", dir(Amenity()))
-        self.assertNotIn("name", pool.__dict__)
+    def test_pep8(self):
+        """Tests for pep8 style"""
+        pep8style = pep8.StyleGuide(quite=True)
+        result = pep8style.check_files(["./models/amenity.py"])
+        self.assertEqual(result.total_errors, 0)
 
+    def test_type(self):
+        """Tests the type"""
+        self.assertEqual(type(self.amenityOne.name), str)
+        self.assertEqual(type(self.amenityTwo.name), str)
+        self.assertIsInstance(self.amenityOne, Amenity)
+        self.assertIsInstance(self.amenityTwo, Amenity)
+
+    def test_attributes(self):
+        """Tests the attributes"""
+        self.assertTrue(hasattr(self.amenityOne, "name"))
+        self.assertFalse(hasattr(self.amenityOne, "user_id"))
+        self.assertTrue(self.amenityOne.id != self.amenityTwo.id)
 
 if __name__ == "__main__":
     unittest.main()
