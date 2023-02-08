@@ -15,7 +15,7 @@ class BaseModel:
                 if k != '__class__':
                     setattr(self, k, v)
                 if k == "created_at" or k == "updated_at":
-                    value = datetime.strptime(v, "%Y-%m-%dT%H:%M:%S.%f")
+                    v = datetime.strptime(v, "%Y-%m-%dT%H:%M:%S.%f")
         else:
             self.created_at = datetime.now()
             self.updated_at = datetime.now()
