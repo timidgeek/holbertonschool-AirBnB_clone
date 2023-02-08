@@ -14,13 +14,14 @@ class BaseModel:
             for k, v in kwargs.items():
                 if k != '__class__':
                     setattr(self, k, v)
-                if k == "created_at" or k == "updated_at":
-                    v = datetime.strptime(v, "%Y-%m-%dT%H:%M:%S.%f")
+                s = '%Y-%m-%dT%H:%M:%S.%f'
+                self.created_at = datetime.strptime(self.created_at, s)
+                self.updated_at = datetime.strptime(self.updated_at, s)
         else:
             self.created_at = datetime.now()
-            self.updated_at = datetime.now()
+            self.updated_at = self.created_at
             self.id = str(uuid.uuid4())
-            models.FileStorage().new(self)
+            models.storage.new(self)
 
     def __str__(self):
         """returns a string"""
@@ -29,7 +30,7 @@ class BaseModel:
 
     def save(self):
         """updates the public instance attribute with current datetime"""
-        self.updated_at = datetime.now
+        self.updated_at = datetime.now()
         models.storage.save()
 
     def to_dict(self):
