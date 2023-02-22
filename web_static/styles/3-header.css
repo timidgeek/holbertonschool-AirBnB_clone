@@ -1,0 +1,7 @@
+/* header style */
+header {
+    border-bottom: 1px solid #CCC;
+    height: 70px;
+    width: 100%;
+    background: #FFF url(../images/logo.png) 20px center no-repeat;
+}
